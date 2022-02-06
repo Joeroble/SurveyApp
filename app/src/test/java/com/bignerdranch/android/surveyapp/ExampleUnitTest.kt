@@ -1,4 +1,4 @@
-package com.joeroble.android.surveyapp
+package com.bignerdranch.android.surveyapp
 
 import org.junit.Test
 

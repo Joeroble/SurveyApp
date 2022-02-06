@@ -1,4 +1,4 @@
-package com.joeroble.android.surveyapp
+package com.bignerdranch.android.surveyapp
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

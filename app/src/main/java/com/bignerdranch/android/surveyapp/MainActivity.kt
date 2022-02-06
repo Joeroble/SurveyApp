@@ -1,11 +1,10 @@
-package com.joeroble.android.surveyapp
+package com.bignerdranch.android.surveyapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
-import com.bignerdranch.android.surveyapp.R
 
 class MainActivity : AppCompatActivity() {
 
