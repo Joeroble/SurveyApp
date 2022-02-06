@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SurveyApp</string>
+
+<!--Creates the string resources for the buttons, and question text.-->
+    <string name="reset_button_text">Reset</string>
+    <string name="no_button_text">No</string>
+    <string name="yes_button_text">Yes</string>
+    <string name="question_text">Would you like to fight a moon yeti?</string>
+</resources>
