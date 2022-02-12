@@ -1,10 +1,16 @@
 package com.bignerdranch.android.surveyapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
+
+const val EXTRA_YES_COUNT = "com.bignerdranch.android.surveyapp.yes_count"
+const val EXTRA_NO_COUNT = "com.bignerdranch.android.surveyapp.no_count"
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,14 +19,16 @@ class MainActivity : AppCompatActivity() {
     private lateinit var noCountButton: Button
     private lateinit var noCounterText: TextView
     private lateinit var yesCounterText: TextView
-    private lateinit var resetCountersButton: Button
+    private lateinit var surveyResultsButton: Button
 
     // Establishes the view model that will be used to store the counts
     private val surveyViewModel: SurveyViewModel by lazy {
         ViewModelProvider(this).get(SurveyViewModel::class.java)
     }
 
-
+    private val surveyResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+        result -> handleSurveyResult(result)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +39,8 @@ class MainActivity : AppCompatActivity() {
         noCountButton = findViewById(R.id.no_button)
         noCounterText = findViewById(R.id.no_counter)
         yesCounterText = findViewById(R.id.yes_counter)
-        resetCountersButton = findViewById(R.id.reset_button)
+        surveyResultsButton = findViewById(R.id.result_button)
+
 
 
         // Sets up the on click listeners for the buttons, which call the respective functions
@@ -45,9 +54,14 @@ class MainActivity : AppCompatActivity() {
             increaseNoCount()
         }
 
-        resetCountersButton.setOnClickListener{
-            resetCounters()
+        surveyResultsButton.setOnClickListener{
+            Intent(this, SurveyResultActivity::class.java).apply{
+                putExtra(EXTRA_YES_COUNT, surveyViewModel.yesCount)
+                putExtra(EXTRA_NO_COUNT, surveyViewModel.noCount)
+                surveyResultLauncher.launch(this)
+            }
         }
+
         updateCounters()
     }
 
@@ -65,12 +79,7 @@ class MainActivity : AppCompatActivity() {
         updateCounters()
     }
 
-    //Creates the resetCounters function, which will call upon the resetCounters() in
-    // the SurveyViewModel to reset the counters, it will call upon updateCounters() to update the counts.
-    private fun resetCounters(){
-        surveyViewModel.resetCounters()
-        updateCounters()
-    }
+
 
     //Updates the counters with the current counts stored in SurveyViewModel, stores them in
     // yesCount/noCount values and passes them to the yesCounterText/noCounterText with toString()
@@ -81,6 +90,17 @@ class MainActivity : AppCompatActivity() {
     yesCounterText.text = yesCount.toString()
     noCounterText.text = noCount.toString()
 
+    }
+
+    private fun handleSurveyResult(result: ActivityResult){
+        if(result.resultCode == RESULT_OK){
+            val intent = result.data
+            val noCountResult = intent?.getIntExtra(EXTRA_NO_COUNT, 0) ?: 0
+            val yesCountResult = intent?.getIntExtra(EXTRA_YES_COUNT, 0) ?: 0
+            surveyViewModel.yesCount = yesCountResult
+            surveyViewModel.noCount = noCountResult
+            updateCounters()
+        }
     }
 }
 

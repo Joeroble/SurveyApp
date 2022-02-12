@@ -9,6 +9,7 @@ class SurveyViewModel: ViewModel() {
      var yesCount = 0
      var noCount = 0
 
+
     fun increaseYesCount(){
     yesCount += 1
     }
