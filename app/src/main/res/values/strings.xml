@@ -7,4 +7,8 @@
     <string name="yes_button_text">Yes</string>
     <string name="question_text">Would you like to fight a moon yeti?</string>
     <string name="result_button_text">Results</string>
+    <string name="total_yes_count_text">Total Yes Count</string>
+    <string name="total_no_count_text">Total No Count</string>
+    <string name="reset_button_text">Reset</string>
+    <string name="continue_survey_button_text">Continue Survey</string>
 </resources>

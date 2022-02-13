@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
         ViewModelProvider(this).get(SurveyViewModel::class.java)
     }
 
+    // Establishes the surveyResultLauncher that will take teh results from SurveyResultActivity and store it in results, and pass it to
+    // handleSurveyResult.
     private val surveyResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
         result -> handleSurveyResult(result)
     }
@@ -46,6 +48,10 @@ class MainActivity : AppCompatActivity() {
         // Sets up the on click listeners for the buttons, which call the respective functions
         // for each button(increase the yes or no counts, and reset the count).  It will
         // update the counters at the end
+
+        // Replaces the reset button with a Results button, this will call on the SurveyResultActivity,
+        //it will pass the current counts and associate them with their respective EXTRA consts, and
+        // call on the surveyResultLauncher.
         yesCountButton.setOnClickListener{
             increaseYesCount()
         }
@@ -92,6 +98,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    // sets up the handleSurveyResult function, this will take the result returned in
+    // the surveyResultLauncher, check if it has a RESULT_OK, if it does, it stores the data
+    // in intent, and then extracts the values associated with the EXTRA_NO_COUNT, and EXTRA_YES_COUNT
+    // then passes them to the surveyViewModel to set the current values(if they were kept or reset in
+    // SurveyResultActivity, and then updates the counters.
     private fun handleSurveyResult(result: ActivityResult){
         if(result.resultCode == RESULT_OK){
             val intent = result.data

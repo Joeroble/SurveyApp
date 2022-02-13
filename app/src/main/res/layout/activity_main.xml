@@ -73,6 +73,7 @@ lines are used for the question text, and reset button.-->
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias=".47" />
 
+<!--    What was the reset button, has been modified to become the result button-->
     <Button
         android:id="@+id/result_button"
         android:layout_width="wrap_content"

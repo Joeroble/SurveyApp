@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".SurveyResultActivity">
 
+<!--    This sets up the buttons and text views for the UI, along with two extra text views for
+usability in showing which count is which.-->
     <TextView
         android:id="@+id/yes_counter"
         android:layout_width="wrap_content"
@@ -30,7 +32,7 @@
         android:id="@+id/reset_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Reset"
+        android:text="@string/reset_button_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintHorizontal_bias="0.5"
@@ -41,7 +43,7 @@
         android:id="@+id/continue_survey_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Continue Survey"
+        android:text="@string/continue_survey_button_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
@@ -58,5 +60,25 @@
         app:layout_constraintGuide_begin="205dp"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/total_yes_count_text"
+        app:layout_constraintBottom_toTopOf="@+id/yes_counter"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/total_no_count_text"
+        app:layout_constraintBottom_toTopOf="@+id/no_counter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
